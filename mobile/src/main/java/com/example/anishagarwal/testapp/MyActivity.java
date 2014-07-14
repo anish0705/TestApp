@@ -3,6 +3,8 @@ package com.example.anishagarwal.testapp;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -53,13 +55,18 @@ public class MyActivity extends ActionBarActivity {
                 Intent toOperate = new Intent(getApplicationContext(), ViewDetails.class);
                 //toOperate.putExtra(EXTRA_EVENT_ID, eventId);
                 PendingIntent viewPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, toOperate, 0);
+                Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.calculator_background);
 
+                Intent addIntent = new Intent(Intent.ACTION_VIEW);
+                addIntent.putExtra("action","+");
+                PendingIntent addPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, addIntent, 0);
                 NotificationCompat.Builder notificationBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
-                                .setSmallIcon(R.drawable.ic_launcher)
+                                .setSmallIcon(R.drawable.calculator_background)
                                 .setContentTitle("Test Title")
                                 .setContentText("Test text")
-                                .setContentIntent(viewPendingIntent);
+                                .setContentIntent(viewPendingIntent).setLargeIcon(largeIcon);
+
 
 // Get an instance of the NotificationManager service
                 NotificationManagerCompat notificationManager =
