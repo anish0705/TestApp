@@ -59,12 +59,6 @@ public class MyActivity extends ActionBarActivity {
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.calculator_background);
 
 
-                Intent addIntent = new Intent(Intent.ACTION_VIEW);
-                addIntent.putExtra("action","+");
-                PendingIntent addPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, addIntent, 0);
-
-
-
                 NotificationCompat.Builder notificationBuilder =
                         new NotificationCompat.Builder(getApplicationContext())
                                 .setSmallIcon(R.drawable.ic_launcher)
@@ -73,7 +67,7 @@ public class MyActivity extends ActionBarActivity {
                                 .setContentIntent(viewPendingIntent)
                                 .setLargeIcon(largeIcon);
 
-               /* //for addition option
+                //for addition option
                 Intent addIntent = new Intent();
                 //Uri geoUri = Uri.parse("geo:38.89,-77.03");
                 //addIntent.setData(geoUri);
@@ -116,10 +110,6 @@ public class MyActivity extends ActionBarActivity {
 
                           notificationBuilder.addAction(R.drawable.multiply, getString(R.string.multiply_button), mapPendingIntent3);
 
-
-                /*if(addIntent.resolveActivity(getPackageManager())!=null) {
-                    startActivity(toOperate);
-                }*/
 
 
                 Intent yesReceive = new Intent();

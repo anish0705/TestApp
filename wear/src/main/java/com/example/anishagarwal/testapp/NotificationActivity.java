@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 
-public class NotificationActivity extends Activity {
+public class NotificationActivity extends InsetActivity {
 
 
     private TextView mTextView;
@@ -25,6 +25,11 @@ public class NotificationActivity extends Activity {
                 //Log.d(TAG, "TextView: " + mTextView.getText() + " view=" + mTextView);
             }
         });
+    }
+
+    @Override
+    public void onReadyForContent() {
+
     }
 
 }
