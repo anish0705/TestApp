@@ -7,7 +7,11 @@ import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.widget.TextView;
 
+<<<<<<< HEAD
+public class MyActivity  extends InsetActivity {
+=======
 public class MyActivity  extends Activity {
+>>>>>>> fe4b395db8d7dd47008f24c55b52f87636a5493d
 
     private TextView mTextView;
 
@@ -23,5 +27,10 @@ public class MyActivity  extends Activity {
                 //Log.d(TAG, "TextView: " + mTextView.getText() + " view=" + mTextView);
             }
         });
+    }
+
+    @Override
+    public void onReadyForContent() {
+
     }
 }
