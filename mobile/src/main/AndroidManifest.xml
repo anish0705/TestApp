@@ -18,15 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ViewDetails"
-            android:label="@string/title_activity_view_details" >
+
+        <receiver android:name="ViewDetails">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.ADD" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="ACTION_SUB" />
+                <action android:name="ACTION_ADD" />
+                <action android:name="ACTION_MUL" />
             </intent-filter>
-        </activity>
+        </receiver>
     </application>
 
 </manifest>

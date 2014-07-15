@@ -1,6 +1,7 @@
 package com.example.anishagarwal.testapp;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -69,85 +70,65 @@ public class MyActivity extends ActionBarActivity {
 
                 //for addition option
                 Intent addIntent = new Intent();
-                //Uri geoUri = Uri.parse("geo:38.89,-77.03");
-                //addIntent.setData(geoUri);
+                addIntent.setAction("ACTION_ADD");
                 Bundle b1 = new Bundle();
                 b1.putInt("number1",num1);
                 b1.putInt("number2",num2);
                 b1.putString("action", "plus");
                 addIntent.putExtras(b1);
-                //addIntent.setAction(ACTION_ADD);
-                //addIntent.putExtra("action", "plus");
-                //addIntent.putExtra();
-                //addIntent.putExtra("number2",num2);
-                PendingIntent mapPendingIntent1 =
-                        PendingIntent.getActivity(getApplicationContext(), 0, addIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                  notificationBuilder.addAction(R.drawable.plus, getString(R.string.plus_button), mapPendingIntent1);
+
+                PendingIntent addPendingIntent =
+                        PendingIntent.getBroadcast(getApplicationContext(), 0, addIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                  notificationBuilder.addAction(R.drawable.plus, getString(R.string.plus_button), addPendingIntent);
 
                 //for subtraction option
 
-                Intent subIntent = new Intent(Intent.ACTION_VIEW);
-                //subIntent.putExtra("action", "minus");
+                Intent subIntent = new Intent();
+                subIntent.setAction("ACTION_SUB");
                 Bundle b2 = new Bundle();
                 b2.putInt("number1", num1);
                 b2.putInt("number2", num2);
                 b2.putString("action", "minus");
                 subIntent.putExtras(b2);
-                PendingIntent mapPendingIntent2 =
-                        PendingIntent.getActivity(getApplicationContext(), 0, subIntent, 0);
-                    notificationBuilder.addAction(R.drawable.minus, getString(R.string.minus_button), mapPendingIntent2);
+                subIntent.setAction("ACTION_SUB");
+                PendingIntent subPendingIntent =
+                        PendingIntent.getBroadcast(getApplicationContext(), 0, subIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    notificationBuilder.addAction(R.drawable.minus, getString(R.string.minus_button), subPendingIntent);
 
                 //for multiplication option
-                Intent mulIntent = new Intent(Intent.ACTION_VIEW);
-                //mulIntent.putExtra("action", "multiply");
+                Intent mulIntent = new Intent();
+                mulIntent.setAction("ACTION_MUL");
                 Bundle b3 = new Bundle();
                 b3.putInt("number1", num1);
                 b3.putInt("number2", num2);
                 b3.putString("action", "minus");
-                subIntent.putExtras(b3);
-                PendingIntent mapPendingIntent3 =
-                        PendingIntent.getActivity(getApplicationContext(),0 , mulIntent, 0);
+                mulIntent.putExtras(b3);
+                PendingIntent mulPendingIntent =
+                        PendingIntent.getBroadcast(getApplicationContext(),0 , mulIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                          notificationBuilder.addAction(R.drawable.multiply, getString(R.string.multiply_button), mulPendingIntent);
 
-                          notificationBuilder.addAction(R.drawable.multiply, getString(R.string.multiply_button), mapPendingIntent3);
-
-
-
-                Intent yesReceive = new Intent();
-                yesReceive.setAction("YES_ACTION");
-                PendingIntent pendingIntentYes = PendingIntent.getBroadcast(getApplicationContext(), 0, yesReceive, PendingIntent.FLAG_UPDATE_CURRENT);
-                notificationBuilder.addAction(R.drawable.plus, "Yes", pendingIntentYes);
-
-//Maybe intent
-                Intent maybeReceive = new Intent();
-                maybeReceive.setAction("MAYBE_ACTION");
-                PendingIntent pendingIntentMaybe = PendingIntent.getBroadcast(getApplicationContext(), 0, maybeReceive, PendingIntent.FLAG_UPDATE_CURRENT);
-                notificationBuilder.addAction(R.drawable.minus, "Partly", pendingIntentMaybe);
-
-//No intent
-                Intent noReceive = new Intent();
-                noReceive.setAction("NO_ACTION");
-                PendingIntent pendingIntentNo = PendingIntent.getBroadcast(getApplicationContext(), 0, noReceive, PendingIntent.FLAG_UPDATE_CURRENT);
-                notificationBuilder.addAction(R.drawable.multiply, "No", pendingIntentNo);
-
-
-
-// Get an instance of the NotificationManager service
                 NotificationManagerCompat notificationManager =
                         NotificationManagerCompat.from(getApplicationContext());
 
-// Build the notification and issues it with notification manager.
-                notificationManager.notify(notificationId, notificationBuilder.build());
+                NotificationCompat.BigTextStyle secondPageStyle = new NotificationCompat.BigTextStyle();
+                secondPageStyle.setBigContentTitle("Numbers Entered");
+                secondPageStyle.bigText("Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text");
 
+                Notification secondPageNotification = new NotificationCompat.Builder(getApplicationContext())
+                        .setStyle(secondPageStyle)
+                        .setGroup("Hello")
+                        .build();
+
+                Notification twoPageNotification = new WearableExtender().addPage(secondPageNotification).extend(notificationBuilder).build();
+
+// Build the notification and issues it with notification manager.
+                notificationManager.notify(notificationId, twoPageNotification);
             }
         });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //cancel the job
-                //num1 = 0;
-                //num2 = 0;
-
                 //reset editable areas to null
                 firstET.setText("");
                 secondET.setText("");
